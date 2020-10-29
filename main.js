@@ -13,23 +13,27 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary() {
-    let title = document.getElementsByName('title-input').value;
-    let author = document.getElementsByName('author-input').value;
-    let pages = document.getElementsByName('pages-input').value;
-    let read = document.getElementsByName('read-input').checked;
+    let title = document.getElementById("title-input").value;
+    let author = document.getElementById("author-input").value;
+    let pages = document.getElementById("pages-input").value;
+    let read = document.getElementById("read-input").checked;
+ 
     book = new Book(title, author, pages, read);
     myLibrary.push(book);
-    form.reset();
     displayLibrary(myLibrary)
+    form.reset();
 }
 
 function displayLibrary(array) {
+    while (bookList.firstChild && bookList.removeChild(bookList.firstChild)) {
+    }
+
     for (let i = 0; i < array.length; i++) {
         let bookContainer = document.createElement('div');
-        let title = document.createElement('span');
-        let author = document.createElement('span');
-        let pages = document.createElement('span');
-        let read = document.createElement('span');
+        let title = document.createElement('h3');
+        let author = document.createElement('p');
+        let pages = document.createElement('p');
+        let read = document.createElement('p');
 
         title.textContent = array[i].title;
         author.textContent = array[i].author;
@@ -42,12 +46,15 @@ function displayLibrary(array) {
         bookContainer.appendChild(read);
         bookList.appendChild(bookContainer);
     }
+
 }
 
-book1 = new Book("Title1", "Author1", 32, true);
-book2 = new Book("Title2", "Author2", 32, false);
+// book1 = new Book("Title1", "Author1", 32, true);
+// book2 = new Book("Title2", "Author2", 32, false);
 
-addBookToLibrary();
-displayLibrary(myLibrary);
+submit.addEventListener('click', (e) => {
+    e.preventDefault();
+    addBookToLibrary();
+})
 
-submit.onclick = addBookToLibrary()
+
