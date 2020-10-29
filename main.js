@@ -1,4 +1,6 @@
 let bookList = document.getElementById("book-list");
+let form = document.getElementById("book-form");
+let submit = document.getElementById("submit");
 
 
 let myLibrary = []
@@ -10,15 +12,16 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
-function addBookToLibrary(book) {
+function addBookToLibrary() {
+    let title = document.getElementsByName('title-input').value;
+    let author = document.getElementsByName('author-input').value;
+    let pages = document.getElementsByName('pages-input').value;
+    let read = document.getElementsByName('read-input').checked;
+    book = new Book(title, author, pages, read);
     myLibrary.push(book);
+    form.reset();
+    displayLibrary(myLibrary)
 }
-
-book1 = new Book("Title1", "Author1", 32, true);
-book2 = new Book("Title2", "Author2", 32, false);
-
-addBookToLibrary(book1);
-addBookToLibrary(book2);
 
 function displayLibrary(array) {
     for (let i = 0; i < array.length; i++) {
@@ -41,7 +44,10 @@ function displayLibrary(array) {
     }
 }
 
+book1 = new Book("Title1", "Author1", 32, true);
+book2 = new Book("Title2", "Author2", 32, false);
 
+addBookToLibrary();
 displayLibrary(myLibrary);
 
-
+submit.onclick = addBookToLibrary()
