@@ -1,5 +1,0 @@
-Color gaps
-Checkbox to change state of reading the book
-Delete book
-Add Local Storage
-Validations on form
