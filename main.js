@@ -11,16 +11,21 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-function saveLocalStorage() {
+const saveLocalStorage = () => {
   localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
-}
+};
 
-function displayLibrary(array) {
+const changeReadStatus = (status) => {
+  const result = status ? 'You have already read this book!' : "You haven't read this book yet!";
+  return result;
+};
+
+const displayLibrary = (array) => {
   while (bookList.firstChild) {
     bookList.removeChild(bookList.firstChild);
   }
 
-  function createReadBtn(book) {
+  const createReadBtn = (book) => {
     const readBtn = document.createElement('button');
     readBtn.textContent = (book.read ? 'Unread' : 'Read');
 
@@ -32,9 +37,9 @@ function displayLibrary(array) {
     });
 
     return readBtn;
-  }
+  };
 
-  function createDeleteBtn(book) {
+  const createDeleteBtn = (book) => {
     const deleteBtn = document.createElement('button');
 
     deleteBtn.textContent = 'Delete';
@@ -49,7 +54,7 @@ function displayLibrary(array) {
     });
 
     return deleteBtn;
-  }
+  };
 
   for (let i = 0; i < array.length; i += 1) {
     const bookContainer = document.createElement('li');
@@ -62,11 +67,7 @@ function displayLibrary(array) {
     title.textContent = array[i].title;
     author.textContent = array[i].author;
     pages.textContent = `${array[i].pages} pages`;
-    if (array[i].read) {
-      read.textContent = 'You have already read this book!';
-    } else {
-      read.textContent = "You haven't read this book yet!";
-    }
+    read.textContent = changeReadStatus(array[i].read);
     bookContainer.appendChild(title);
     bookContainer.appendChild(author);
     bookContainer.appendChild(pages);
@@ -82,9 +83,9 @@ function displayLibrary(array) {
     bookContainer.appendChild(readBtn);
     bookContainer.appendChild(deleteBtn);
   }
-}
+};
 
-function addBookToLibrary() {
+const addBookToLibrary = () => {
   const title = document.getElementById('title-input').value;
   const author = document.getElementById('author-input').value;
   const pages = document.getElementById('pages-input').value;
@@ -95,7 +96,7 @@ function addBookToLibrary() {
   displayLibrary(myLibrary);
   saveLocalStorage();
   form.reset();
-}
+};
 
 submit.addEventListener('click', (e) => {
   e.preventDefault();
@@ -103,20 +104,19 @@ submit.addEventListener('click', (e) => {
   form.style.display = 'none';
 });
 
-
-function defaultBooks() {
+const defaultBooks = () => {
   const dbook1 = new Book('The Winds of Winter', 'GRRM', 1034, true);
   const dbook2 = new Book('A Dream of Spring', 'GRRM', 890, true);
   const dbook3 = new Book('A Clash of Kings', 'GRRM', 1300, false);
   const dbook4 = new Book('A Game of Thrones', 'GRRM', 734, true);
 
   myLibrary.push(dbook1, dbook2, dbook3, dbook4);
-}
+};
 
-function showForm() {
+const showForm = () => {
   if (form.style.display === 'block') form.style.display = 'none';
   else form.style.display = 'block';
-}
+};
 
 if (localStorage.getItem('myLibrary') === null) {
   defaultBooks();
