@@ -3,9 +3,10 @@ let form = document.getElementById("book-form");
 let submit = document.getElementById("submit");
 let readStatus = document.getElementsByClassName("read-status");
 let showFormBtn = document.querySelector(".show-form");
-
 let myLibrary = [];
 let id = 0;
+
+saveLocalStorage();
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -67,7 +68,7 @@ function displayLibrary(array) {
         bookContainer.appendChild(readBtn);
         bookContainer.appendChild(deleteBtn);
     }
-
+    saveLocalStorage();
 }
 
 function showForm() {
@@ -124,6 +125,11 @@ function createDeleteBtn(book) {
     })
 
     return deleteBtn;
+}
+
+function saveLocalStorage() {
+    localStorage.setItem('myLibrary', myLibrary);  
+    console.log(localStorage.getItem('myLibrary'))
 }
 
 showFormBtn.onclick = () => showForm();
