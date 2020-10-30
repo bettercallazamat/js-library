@@ -76,8 +76,8 @@ function displayLibrary(array) {
     const readBtn = createReadBtn(array[i]);
     const deleteBtn = createDeleteBtn(array[i]);
 
-    readBtn.classList.add('btn', 'btn-primary', 'btn-style','mt-2');
-    deleteBtn.classList.add('btn', 'btn-primary', 'btn-style','mt-2');
+    readBtn.classList.add('btn', 'btn-primary', 'btn-style', 'mt-2');
+    deleteBtn.classList.add('btn', 'btn-primary', 'btn-style', 'mt-2');
 
     bookContainer.appendChild(readBtn);
     bookContainer.appendChild(deleteBtn);
