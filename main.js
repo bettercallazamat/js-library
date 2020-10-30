@@ -3,18 +3,19 @@ let form = document.getElementById("book-form");
 let submit = document.getElementById("submit");
 let readStatus = document.getElementsByClassName("read-status");
 let showFormBtn = document.querySelector(".show-form");
-let myLibrary = [];
-let id = 0;
+myLibrary = JSON.parse(localStorage.getItem('myLibrary')) || [];
 
-saveLocalStorage();
+if (localStorage.getItem('myLibrary') === null) {
+    defaultBooks()
+}
+
+displayLibrary(myLibrary)
 
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.id = id;
-    id++;
 }
 
 function addBookToLibrary() {
@@ -25,7 +26,8 @@ function addBookToLibrary() {
 
     book = new Book(title, author, pages, read);
     myLibrary.push(book);
-    displayLibrary(myLibrary)
+    displayLibrary(myLibrary);
+    saveLocalStorage();
     form.reset();
 }
 
@@ -68,35 +70,13 @@ function displayLibrary(array) {
         bookContainer.appendChild(readBtn);
         bookContainer.appendChild(deleteBtn);
     }
-    saveLocalStorage();
 }
-
-function showForm() {
-    if (form.style.display === "block")
-        form.style.display = "none";
-    else
-        form.style.display = "block";
-}
-
-function defaultBooks() {
-    let dbook1 = new Book("The Winds of Winter", "GRRM", 1034, true);
-    let dbook2 = new Book("A Dream of Spring", "GRRM", 890, true);
-    let dbook3 = new Book("A Clash of Kings", "GRRM", 1300, false);
-    let dbook4 = new Book("A Game of Thrones", "GRRM", 734, true);
-
-    myLibrary.push(dbook1, dbook2, dbook3, dbook4);
-    displayLibrary(myLibrary)
-}
-
 
 submit.addEventListener('click', (e) => {
     e.preventDefault();
     addBookToLibrary();
     form.style.display = "none";
 })
-
-defaultBooks();
-
 
 function createReadBtn(book) {
     let readBtn = document.createElement('button');
@@ -105,7 +85,8 @@ function createReadBtn(book) {
     readBtn.addEventListener('click', () => {
         book.read = !book.read;
         readBtn.textContent = (book.read ? 'Unread' : 'Read');
-        displayLibrary(myLibrary)
+        displayLibrary(myLibrary);
+        saveLocalStorage();
     })
 
     return readBtn;
@@ -120,16 +101,33 @@ function createDeleteBtn(book) {
         let index = myLibrary.findIndex(item => item.title === book.title)
 
         myLibrary.splice(index, 1)
-
+        
         displayLibrary(myLibrary)
+        saveLocalStorage()
     })
 
     return deleteBtn;
 }
 
 function saveLocalStorage() {
-    localStorage.setItem('myLibrary', myLibrary);  
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary));  
     console.log(localStorage.getItem('myLibrary'))
+}
+
+function defaultBooks() {
+    let dbook1 = new Book("The Winds of Winter", "GRRM", 1034, true);
+    let dbook2 = new Book("A Dream of Spring", "GRRM", 890, true);
+    let dbook3 = new Book("A Clash of Kings", "GRRM", 1300, false);
+    let dbook4 = new Book("A Game of Thrones", "GRRM", 734, true);
+
+    myLibrary.push(dbook1, dbook2, dbook3, dbook4);
+}
+
+function showForm() {
+    if (form.style.display === "block")
+        form.style.display = "none";
+    else
+        form.style.display = "block";
 }
 
 showFormBtn.onclick = () => showForm();
