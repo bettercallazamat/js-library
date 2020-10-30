@@ -7,8 +7,6 @@
 
 ![screenshot](./screenshot1.png)
 
-In this application you can create a library of books you would like to read
-
 ## Built With
 
 - Javascript
@@ -18,7 +16,6 @@ In this application you can create a library of books you would like to read
 ## Live Demo
 
 [Live Demo Link](https://js-library.netlify.app/)
-
 
 ## Getting Started
 
