@@ -1,37 +1,37 @@
 body {
-    padding: 20px;
+  padding: 20px;
 }
 
 ul {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 5px;
-    row-gap: 20px
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 5px;
+  row-gap: 20px
 }
 
 h1 {
-    background-image: url(https://cdn1.vectorstock.com/i/1000x1000/75/55/bookshelve-with-books-background-library-vector-20657555.jpg);
-    background-repeat: repeat-x;
-    color: white!important;
-    text-shadow: 2px 2px black;
+  background-image: url('https://cdn1.vectorstock.com/i/1000x1000/75/55/bookshelve-with-books-background-library-vector-20657555.jpg');
+  background-image: url(https://image.freepik.com/free-vector/book-shelves-dtcorative-colorful-icon-poster_1284-6714.jpg);
+  background-repeat: repeat-x;
+  color: white!important;
+  text-shadow: 2px 2px black;
 }
 
-
 #book-form {
-    display: none;
+  display: none;
 }
 
 #book-list {
-    border: 3px solid brown;
-    padding: 10px;
+  border: 3px solid brown;
+  padding: 10px;
 }
 
 #book-list li {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    border: 1px solid black;
-    border-radius: 3px;
-    padding: 5px;
-    
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 5px;
+  
 }

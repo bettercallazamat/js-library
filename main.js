@@ -1,7 +1,8 @@
 let bookList = document.getElementById("book-list");
 let form = document.getElementById("book-form");
 let submit = document.getElementById("submit");
-
+let readStatus = document.getElementsByClassName("read-status");
+let showFormBtn = document.querySelector(".show-form")
 
 let myLibrary = []
 
@@ -17,7 +18,7 @@ function addBookToLibrary() {
     let author = document.getElementById("author-input").value;
     let pages = document.getElementById("pages-input").value;
     let read = document.getElementById("read-input").checked;
- 
+
     book = new Book(title, author, pages, read);
     myLibrary.push(book);
     displayLibrary(myLibrary)
@@ -36,35 +37,42 @@ function displayLibrary(array) {
         let author = document.createElement('p');
         let pages = document.createElement('p');
         let read = document.createElement('p');
-
+        read.classList.add("read-status");
+        
         title.textContent = array[i].title;
         author.textContent = array[i].author;
         pages.textContent = array[i].pages + " pages";
         if (array[i].read) {
-        read.textContent = "You have already read this book!";
+            read.textContent = "You have already read this book!";
         }
         else{
-        read.textContent = "You haven't read this book yet!";       
+            read.textContent = "You haven't read this book yet!";       
         }
         bookContainer.appendChild(title);
         bookContainer.appendChild(author);
         bookContainer.appendChild(pages);
         bookContainer.appendChild(read);
         bookList.appendChild(bookContainer);
+
+        let readBtn = createReadBtn(array[i]);
+        readBtn.classList.add('btn');
+        readBtn.classList.add('btn-primary');
+
+        bookContainer.appendChild(readBtn);
+
     }
 
 }
 
-function showForm(a)
+function showForm()
 {
-    if(form.style.display==="block")
-        form.style.display="none";
+    if(form.style.display === "block")
+        form.style.display = "none";
     else
-        form.style.display="block";
+        form.style.display = "block";
 }
 
 function defaultBooks() {
-
     let dbook1 = new Book( "The Winds of Winter", "GRRM", 1034, true);
     let dbook2 = new Book( "A Dream of Spring", "GRRM", 890, true);
     let dbook3 = new Book( "A Clash of Kings", "GRRM", 1300, false);
@@ -83,3 +91,18 @@ submit.addEventListener('click', (e) => {
 
 defaultBooks();
 
+
+function createReadBtn(book) {
+    let readBtn = document.createElement('button');
+    readBtn.textContent = (book.read ? 'Unread' : 'Read');
+    
+    readBtn.addEventListener('click', () => {
+        book.read = !book.read;
+        readBtn.textContent = (book.read ? 'Unread' : 'Read');
+        displayLibrary(myLibrary)
+    })
+
+    return readBtn;
+}
+
+showFormBtn.onclick = () => showForm();
