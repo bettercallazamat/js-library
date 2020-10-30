@@ -25,8 +25,10 @@ function addBookToLibrary() {
 }
 
 function displayLibrary(array) {
-    while (bookList.firstChild && bookList.removeChild(bookList.firstChild)) {
+    while (bookList.firstChild) {
+        bookList.removeChild(bookList.firstChild)
     }
+    
 
     for (let i = 0; i < array.length; i++) {
         let bookContainer = document.createElement('div');
@@ -49,12 +51,19 @@ function displayLibrary(array) {
 
 }
 
-// book1 = new Book("Title1", "Author1", 32, true);
-// book2 = new Book("Title2", "Author2", 32, false);
+function showForm(a)
+{
+    if(form.style.display==="block")
+        form.style.display="none";
+    else
+        form.style.display="block";
+}
+
 
 submit.addEventListener('click', (e) => {
     e.preventDefault();
     addBookToLibrary();
+    form.style.display="none";
 })
 
 
