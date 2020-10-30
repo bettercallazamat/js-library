@@ -1,0 +1,51 @@
+
+body {
+  padding: 20px;
+}
+
+ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(24%, 1fr));
+  gap: 5px;
+  row-gap: 20px;
+  background-image: url(https://image.freepik.com/free-vector/book-shelves-dtcorative-colorful-icon-poster_1284-6714.jpg);
+  background-repeat: repeat-x;
+  color: white !important;
+  text-shadow: 1px 1px black;
+  text-overflow: ellipsis;
+}
+
+li {
+  background-color: rgba(221, 178, 114, 0.7);
+}
+
+h1 {
+  background-image: url(https://image.freepik.com/free-vector/book-shelves-dtcorative-colorful-icon-poster_1284-6714.jpg);
+  background-repeat: repeat-x;
+  color: white !important;
+  text-shadow: 2px 2px black;
+  border: 3px solid brown;
+}
+
+#book-form {
+  display: none;
+}
+
+#book-list {
+  border: 3px solid brown;
+  padding: 10px;
+}
+
+#book-list li {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+#submit {
+  margin-left: 10%;
+  margin-top: 1%;
+}
