@@ -31,7 +31,7 @@ function displayLibrary(array) {
     
 
     for (let i = 0; i < array.length; i++) {
-        let bookContainer = document.createElement('div');
+        let bookContainer = document.createElement('li');
         let title = document.createElement('h3');
         let author = document.createElement('p');
         let pages = document.createElement('p');
@@ -39,7 +39,7 @@ function displayLibrary(array) {
 
         title.textContent = array[i].title;
         author.textContent = array[i].author;
-cre        pages.textContent = array[i].pages + " pages";
+        pages.textContent = array[i].pages + " pages";
         if (array[i].read) {
         read.textContent = "You have already read this book!";
         }
@@ -65,11 +65,12 @@ function showForm(a)
 
 function defaultBooks() {
 
-    let defaultList = new Book( "The Winds of Winter", "GRRM", 134, true);
-    defaultList = new Book( "The Winds of Winter2", "GRRM", 134, true);
+    let dbook1 = new Book( "The Winds of Winter", "GRRM", 1034, true);
+    let dbook2 = new Book( "A Dream of Spring", "GRRM", 890, true);
+    let dbook3 = new Book( "A Clash of Kings", "GRRM", 1300, false);
+    let dbook4 = new Book( "A Game of Thrones", "GRRM", 734, true);
 
-    console.log(defaultList)
-    myLibrary.push(defaultList);
+    myLibrary.push(dbook1,dbook2,dbook3,dbook4);
     displayLibrary(myLibrary)
 }
 
