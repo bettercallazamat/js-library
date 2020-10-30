@@ -39,9 +39,13 @@ function displayLibrary(array) {
 
         title.textContent = array[i].title;
         author.textContent = array[i].author;
-        pages.textContent = array[i].pages;
-        read.textContent = array[i].read;
-
+cre        pages.textContent = array[i].pages + " pages";
+        if (array[i].read) {
+        read.textContent = "You have already read this book!";
+        }
+        else{
+        read.textContent = "You haven't read this book yet!";       
+        }
         bookContainer.appendChild(title);
         bookContainer.appendChild(author);
         bookContainer.appendChild(pages);
@@ -59,6 +63,16 @@ function showForm(a)
         form.style.display="block";
 }
 
+function defaultBooks() {
+
+    let defaultList = new Book( "The Winds of Winter", "GRRM", 134, true);
+    defaultList = new Book( "The Winds of Winter2", "GRRM", 134, true);
+
+    console.log(defaultList)
+    myLibrary.push(defaultList);
+    displayLibrary(myLibrary)
+}
+
 
 submit.addEventListener('click', (e) => {
     e.preventDefault();
@@ -66,4 +80,5 @@ submit.addEventListener('click', (e) => {
     form.style.display="none";
 })
 
+defaultBooks();
 

@@ -12,19 +12,19 @@
 </head>
 <body>
     <h1 class="mb-2">Library</h1>
-    <button onclick="showForm()">New Book</button>
-
-    <ul id="book-list"></ul>
-
-    <form action="" id="book-form">
+    <button onclick="showForm()">Add New Book</button>
+  <form action="" id="book-form" class="mt-4">
         <input type="text" id="title-input" placeholder="Title of the book"><br>
         <input type="text" id="author-input" placeholder="Author of the book"><br>
         <input type="text" id="pages-input" placeholder="Number of pages"><br>
         <input type="checkbox" id="read-input" value="true">
-        <label for="read">Did you read this book?</label><br>
+        <label for="read">Have you read this book?</label><br>
         <input type="submit" value="Submit" id="submit">
        
     </form>
+    <ul id="book-list" class="mt-4"></ul>
+
+  
 
     <script src="main.js"></script>
 </body>

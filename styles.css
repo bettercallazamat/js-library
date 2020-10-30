@@ -11,3 +11,12 @@ ul {
 #book-form {
     display: none;
 }
+
+#book-list div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 5px;
+}
