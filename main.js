@@ -5,17 +5,19 @@ const showFormBtn = document.querySelector('.show-form');
 const myLibrary = JSON.parse(localStorage.getItem('myLibrary')) || [];
 
 const book = (title, author, pages, read) => {
-  const self = { title, author, pages, read };
+  const self = {
+    title, author, pages, read,
+  };
 
   const bookMethods = (self) => ({
     printReadStatus: () => {
       const result = self.read ? 'You have already read this book!' : "You haven't read this book yet!";
       return result;
-    }
+    },
   });
 
   return Object.assign(self, bookMethods(self));
-}
+};
 
 const saveLocalStorage = () => {
   localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
@@ -74,7 +76,7 @@ const displayLibrary = (array) => {
     author.textContent = array[i].author;
     pages.textContent = `${array[i].pages} pages`;
     read.textContent = array[i].printReadStatus();
-    
+
     bookContainer.appendChild(title);
     bookContainer.appendChild(author);
     bookContainer.appendChild(pages);
@@ -91,8 +93,8 @@ const addBookToLibrary = () => {
   const pages = document.getElementById('pages-input').value;
   const read = document.getElementById('read-input').checked;
 
-  const book = book(title, author, pages, read);
-  myLibrary.push(book);
+  const bookInputs = book(title, author, pages, read);
+  myLibrary.push(bookInputs);
   displayLibrary(myLibrary);
   saveLocalStorage();
   form.reset();
