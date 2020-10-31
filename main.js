@@ -16,7 +16,7 @@ class Book {
     const result = this.read ? 'You have already read this book!' : "You haven't read this book yet!";
     return result;
   }
-};
+}
 
 const saveLocalStorage = () => {
   localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
