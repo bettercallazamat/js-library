@@ -4,20 +4,19 @@ const submit = document.getElementById('submit');
 const showFormBtn = document.querySelector('.show-form');
 const myLibrary = JSON.parse(localStorage.getItem('myLibrary')) || [];
 
-const book = (title, author, pages, read) => {
-  const self = {
-    title, author, pages, read,
-  };
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
 
-  const bookMethods = (self) => ({
-    printReadStatus: () => {
-      const result = self.read ? 'You have already read this book!' : "You haven't read this book yet!";
-      return result;
-    },
-  });
-
-  return Object.assign(self, bookMethods(self));
-};
+  printReadStatus() {
+    const result = this.read ? 'You have already read this book!' : "You haven't read this book yet!";
+    return result;
+  }
+}
 
 const saveLocalStorage = () => {
   localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
@@ -93,7 +92,7 @@ const addBookToLibrary = () => {
   const pages = document.getElementById('pages-input').value;
   const read = document.getElementById('read-input').checked;
 
-  const bookInputs = book(title, author, pages, read);
+  const bookInputs = new Book(title, author, pages, read);
   myLibrary.push(bookInputs);
   displayLibrary(myLibrary);
   saveLocalStorage();
@@ -107,10 +106,10 @@ submit.addEventListener('click', (e) => {
 });
 
 const defaultBooks = () => {
-  const dbook1 = book('The Winds of Winter', 'GRRM', 1034, true);
-  const dbook2 = book('A Dream of Spring', 'GRRM', 890, true);
-  const dbook3 = book('A Clash of Kings', 'GRRM', 1300, false);
-  const dbook4 = book('A Game of Thrones', 'GRRM', 734, true);
+  const dbook1 = new Book('The Winds of Winter', 'GRRM', 1034, true);
+  const dbook2 = new Book('A Dream of Spring', 'GRRM', 890, true);
+  const dbook3 = new Book('A Clash of Kings', 'GRRM', 1300, false);
+  const dbook4 = new Book('A Game of Thrones', 'GRRM', 734, true);
 
   myLibrary.push(dbook1, dbook2, dbook3, dbook4);
 };
