@@ -4,20 +4,23 @@ const submit = document.getElementById('submit');
 const showFormBtn = document.querySelector('.show-form');
 const myLibrary = JSON.parse(localStorage.getItem('myLibrary')) || [];
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
+const book = (title, author, pages, read) => {
+  const self = {
+    title, author, pages, read,
+  };
+
+  const bookMethods = (self) => ({
+    printReadStatus: () => {
+      const result = self.read ? 'You have already read this book!' : "You haven't read this book yet!";
+      return result;
+    },
+  });
+
+  return Object.assign(self, bookMethods(self));
+};
 
 const saveLocalStorage = () => {
   localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
-};
-
-const changeReadStatus = (status) => {
-  const result = status ? 'You have already read this book!' : "You haven't read this book yet!";
-  return result;
 };
 
 const displayLibrary = (array) => {
@@ -62,26 +65,25 @@ const displayLibrary = (array) => {
     const author = document.createElement('p');
     const pages = document.createElement('p');
     const read = document.createElement('p');
+    const readBtn = createReadBtn(array[i]);
+    const deleteBtn = createDeleteBtn(array[i]);
+
     read.classList.add('read-status');
+    readBtn.classList.add('btn', 'btn-primary', 'btn-style', 'mt-2');
+    deleteBtn.classList.add('btn', 'btn-primary', 'btn-style', 'mt-2');
 
     title.textContent = array[i].title;
     author.textContent = array[i].author;
     pages.textContent = `${array[i].pages} pages`;
-    read.textContent = changeReadStatus(array[i].read);
+    read.textContent = array[i].printReadStatus();
+
     bookContainer.appendChild(title);
     bookContainer.appendChild(author);
     bookContainer.appendChild(pages);
     bookContainer.appendChild(read);
-    bookList.appendChild(bookContainer);
-
-    const readBtn = createReadBtn(array[i]);
-    const deleteBtn = createDeleteBtn(array[i]);
-
-    readBtn.classList.add('btn', 'btn-primary', 'btn-style', 'mt-2');
-    deleteBtn.classList.add('btn', 'btn-primary', 'btn-style', 'mt-2');
-
     bookContainer.appendChild(readBtn);
     bookContainer.appendChild(deleteBtn);
+    bookList.appendChild(bookContainer);
   }
 };
 
@@ -91,8 +93,8 @@ const addBookToLibrary = () => {
   const pages = document.getElementById('pages-input').value;
   const read = document.getElementById('read-input').checked;
 
-  const book = new Book(title, author, pages, read);
-  myLibrary.push(book);
+  const bookInputs = book(title, author, pages, read);
+  myLibrary.push(bookInputs);
   displayLibrary(myLibrary);
   saveLocalStorage();
   form.reset();
@@ -105,10 +107,10 @@ submit.addEventListener('click', (e) => {
 });
 
 const defaultBooks = () => {
-  const dbook1 = new Book('The Winds of Winter', 'GRRM', 1034, true);
-  const dbook2 = new Book('A Dream of Spring', 'GRRM', 890, true);
-  const dbook3 = new Book('A Clash of Kings', 'GRRM', 1300, false);
-  const dbook4 = new Book('A Game of Thrones', 'GRRM', 734, true);
+  const dbook1 = book('The Winds of Winter', 'GRRM', 1034, true);
+  const dbook2 = book('A Dream of Spring', 'GRRM', 890, true);
+  const dbook3 = book('A Clash of Kings', 'GRRM', 1300, false);
+  const dbook4 = book('A Game of Thrones', 'GRRM', 734, true);
 
   myLibrary.push(dbook1, dbook2, dbook3, dbook4);
 };
